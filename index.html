@@ -66,26 +66,6 @@
 					<div class="col-xs-10 text-right menu-1">
 						<ul>
 							<li class="active"><a href="index.html">Home</a></li>
-							<li><a href="about.html">Story</a></li>
-							<li class="has-dropdown">
-								<a href="services.html">Services</a>
-								<ul class="dropdown">
-									<li><a href="#">Web Design</a></li>
-									<li><a href="#">eCommerce</a></li>
-									<li><a href="#">Branding</a></li>
-									<li><a href="#">API</a></li>
-								</ul>
-							</li>
-							<li class="has-dropdown">
-								<a href="gallery.html">Gallery</a>
-								<ul class="dropdown">
-									<li><a href="#">HTML5</a></li>
-									<li><a href="#">CSS3</a></li>
-									<li><a href="#">Sass</a></li>
-									<li><a href="#">jQuery</a></li>
-								</ul>
-							</li>
-							<li><a href="contact.html">Contact</a></li>
 						</ul>
 					</div>
 				</div>
@@ -120,7 +100,7 @@
 									Your browser does not support the audio element.
 								</audio>
 								<button id="playGanesh"
-									style="display:none; margin-top:10px; padding:10px 20px; font-size:16px; border:none; background:#d35400; color:#fff; border-radius:5px; cursor:pointer;">
+									style=" margin-top:5px; padding:10px 20px; font-size:12px; border:none; background:#d35400; color:#fff; border-radius:5px; cursor:pointer;">
 									Play Ganesh Vandana
 								</button>
 							</div>
@@ -447,7 +427,9 @@
 						<div class="container">
 							<div class="row animate-box">
 								<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-									<h2> “We’re getting married and we want you there! Join us for love, laughter, and happily ever after.” “Save the date, grab your dancing shoes, and get ready to celebrate with us!”</h2>
+									<h2> “We’re getting married and we want you there! Join us for love, laughter, and
+										happily ever after.” “Save the date, grab your dancing shoes, and get ready to
+										celebrate with us!”</h2>
 								</div>
 							</div>
 						</div>
@@ -669,8 +651,11 @@
 
 				<script>
 					window.addEventListener("load", () => {
-						const audio = document.getElementById("ganeshAudio");
 
+						const audio = document.getElementById("ganeshAudio");
+						document.getElementById("playGanesh").addEventListener("click", () => {
+							audio.play();
+						});
 						// Force reload to prevent browser caching
 						audio.src = "https://ringtoneop.com/wp-content/uploads/2024/07/ganesh-mantra.mp3?nocache=" + new Date().getTime();
 						audio.volume = 1.0;  // Set initial volume
@@ -700,38 +685,34 @@
 					});
 				</script>
 
-<p>
-  <a href="#" id="saveDateBtn" class="btn btn-default btn-sm">Save the date</a>
-</p>
+				<script>
+					document.getElementById("saveDateBtn").addEventListener("click", (e) => {
+						e.preventDefault(); // prevent default link behavior
 
-<script>
-document.getElementById("saveDateBtn").addEventListener("click", (e) => {
-    e.preventDefault(); // prevent default link behavior
+						// Wedding event details
+						const event = {
+							title: "Wedding of Rajesh & Astha",
+							description: "Join us for our wedding celebration!",
+							startDate: "2025-12-01T18:00:00", // YYYY-MM-DDTHH:MM:SS
+							endDate: "2025-12-04T22:00:00"
+						};
 
-    // Wedding event details
-    const event = {
-        title: "Wedding of Rajesh & Astha",
-        description: "Join us for our wedding celebration!",
-        startDate: "2025-12-01T18:00:00", // YYYY-MM-DDTHH:MM:SS
-        endDate: "2025-12-04T22:00:00"
-    };
+						// Convert dates to Google Calendar format: YYYYMMDDTHHMMSSZ
+						const formatDateForGoogle = dateStr => {
+							const dt = new Date(dateStr);
+							return dt.toISOString().replace(/-|:|\.\d+/g, '');
+						};
 
-    // Convert dates to Google Calendar format: YYYYMMDDTHHMMSSZ
-    const formatDateForGoogle = dateStr => {
-        const dt = new Date(dateStr);
-        return dt.toISOString().replace(/-|:|\.\d+/g, '');
-    };
+						// Detect if user is on mobile (iOS/Android) vs desktop
+						const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    // Detect if user is on mobile (iOS/Android) vs desktop
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-    if (!isMobile) {
-        // Desktop: Open Google Calendar
-        const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${formatDateForGoogle(event.startDate)}/${formatDateForGoogle(event.endDate)}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}&sf=true&output=xml`;
-        window.open(googleCalendarUrl, "_blank");
-    } else {
-        // Mobile: download .ics file for Apple/Android calendar apps
-        const icsContent = `
+						if (!isMobile) {
+							// Desktop: Open Google Calendar
+							const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${formatDateForGoogle(event.startDate)}/${formatDateForGoogle(event.endDate)}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}&sf=true&output=xml`;
+							window.open(googleCalendarUrl, "_blank");
+						} else {
+							// Mobile: download .ics file for Apple/Android calendar apps
+							const icsContent = `
 BEGIN:VCALENDAR
 VERSION:2.0
 BEGIN:VEVENT
@@ -744,16 +725,16 @@ END:VEVENT
 END:VCALENDAR
         `.trim();
 
-        const blob = new Blob([icsContent], { type: 'text/calendar' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'wedding_event.ics';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-});
-</script>
+							const blob = new Blob([icsContent], { type: 'text/calendar' });
+							const link = document.createElement('a');
+							link.href = URL.createObjectURL(blob);
+							link.download = 'wedding_event.ics';
+							document.body.appendChild(link);
+							link.click();
+							document.body.removeChild(link);
+						}
+					});
+				</script>
 
 </body>
 
