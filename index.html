@@ -101,7 +101,7 @@
 								</audio>
 								<button id="playGanesh"
 									style=" margin-top:5px; padding:10px 20px; font-size:12px; border:none; background:#d35400; color:#fff; border-radius:5px; cursor:pointer;">
-									Play Ganesh Vandana
+									Play 
 								</button>
 							</div>
 						</div>
@@ -668,7 +668,7 @@
 							playPromise.then(() => {
 								console.log("Autoplay started");
 								// Optional: Stop after N seconds if the audio is longer
-								const maxPlayTime = 15 * 1000; // 30 seconds
+								const maxPlayTime = 20 * 1000; // 30 seconds
 								setTimeout(() => {
 									audio.pause();
 									audio.currentTime = 0; // reset to start
