@@ -93,9 +93,8 @@
 								<div class="simply-countdown simply-countdown-one"></div>
 								<p><a href="#" id="saveDateBtn" class="btn btn-default btn-sm">Save the date</a></p>
 								<!-- audio file served by your web server -->
-<!-- Styled button with inline CSS -->
-<button id="playButton" 
-        style="
+								<!-- Styled button with inline CSS -->
+								<button id="playButton" style="
           background: linear-gradient(45deg, #ff6b6b, #f06595);
           border: none;
           color: white;
@@ -105,17 +104,14 @@
           cursor: pointer;
           box-shadow: 0 5px 15px rgba(0,0,0,0.3);
           transition: all 0.3s ease;
-        "
-        onmouseover="this.style.transform='scale(1.05)';"
-        onmouseout="this.style.transform='scale(1)';"
->
-  click here
-</button>
-<audio id="ganeshAudio" preload="auto">
-  <source src="js/aaj-sajeya-ae-ve-sara-sheher.mp3" type="audio/mpeg">
-</audio>
+        " onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
+									click here
+								</button>
+								<audio id="ganeshAudio" preload="auto">
+									<source src="js/aaj-sajeya-ae-ve-sara-sheher.mp3" type="audio/mpeg">
+								</audio>
 
-						
+
 							</div>
 						</div>
 					</div>
@@ -664,16 +660,16 @@
 
 
 
-<script>
-const audio = document.getElementById("ganeshAudio");
-const playButton = document.getElementById("playButton");
+				<script>
+					const audio = document.getElementById("ganeshAudio");
+					const playButton = document.getElementById("playButton");
 
-playButton.addEventListener("click", () => {
-  audio.play()
-    .then(() => console.log("Audio started!"))
-    .catch(err => console.error("Play failed:", err));
-});
-</script>
+					playButton.addEventListener("click", () => {
+						audio.play()
+							.then(() => console.log("Audio started!"))
+							.catch(err => console.error("Play failed:", err));
+					});
+				</script>
 
 
 
