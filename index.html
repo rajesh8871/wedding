@@ -92,17 +92,12 @@
 
 								<div class="simply-countdown simply-countdown-one"></div>
 								<p><a href="#" id="saveDateBtn" class="btn btn-default btn-sm">Save the date</a></p>
-
-								<!-- 🔱 Lord Ganesha Vandana (Auto Play on Every Page Load) -->
-								<audio id="ganeshAudio" preload="auto">
-									<source src="https://ringtoneop.com/wp-content/uploads/2024/07/ganesh-mantra.mp3"
-										type="audio/mpeg">
-									Your browser does not support the audio element.
+								<!-- audio file served by your web server -->
+								<audio id="ganeshAudio" autoplay muted>
+									<source src="js/aaj-sajeya-ae-ve-sara-sheher.mp3" type="audio/mpeg">
 								</audio>
-								<button id="playGanesh"
-									style=" margin-top:5px; padding:10px 20px; font-size:12px; border:none; background:#d35400; color:#fff; border-radius:5px; cursor:pointer;">
-									Play 
-								</button>
+
+
 							</div>
 						</div>
 					</div>
@@ -651,39 +646,18 @@
 
 				<script>
 					window.addEventListener("load", () => {
-
 						const audio = document.getElementById("ganeshAudio");
-						document.getElementById("playGanesh").addEventListener("click", () => {
-							audio.play();
-						});
-						// Force reload to prevent browser caching
-						audio.src = "https://ringtoneop.com/wp-content/uploads/2024/07/ganesh-mantra.mp3?nocache=" + new Date().getTime();
-						audio.volume = 1.0;  // Set initial volume
-						audio.loop = false;  // Ensure it doesn't loop
-
-						// Try to autoplay
-						const playPromise = audio.play();
-
-						if (playPromise !== undefined) {
-							playPromise.then(() => {
-								console.log("Autoplay started");
-								// Optional: Stop after N seconds if the audio is longer
-								const maxPlayTime = 35 * 1000; // 30 seconds
-								setTimeout(() => {
-									audio.pause();
-									audio.currentTime = 0; // reset to start
-								}, maxPlayTime);
-							}).catch((err) => {
-								console.warn("Autoplay blocked:", err);
-							});
-						}
-
-						// Stop audio automatically when it ends
-						audio.addEventListener("ended", () => {
-							audio.currentTime = 0;
-						});
+						// Start muted autoplay
+						audio.play().then(() => {
+							console.log("Muted autoplay started");
+							// Unmute after a short delay
+							setTimeout(() => {
+								audio.muted = false;
+							}, 2000);
+						}).catch(err => console.warn("Autoplay failed:", err));
 					});
 				</script>
+
 
 				<script>
 					document.getElementById("saveDateBtn").addEventListener("click", (e) => {
