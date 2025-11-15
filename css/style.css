@@ -1246,6 +1246,7 @@ form label {
   -ms-border-radius: 4px;
   border-radius: 4px;
 }
+
 @media screen and (max-width: 992px) {
   #fh5co-testimonial .wrap-testimony .testimony-slide blockquote {
     width: 100%;
